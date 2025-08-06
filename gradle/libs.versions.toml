@@ -8,13 +8,20 @@ espressoCore = "3.7.0"
 lifecycleRuntimeKtx = "2.6.1"
 activityCompose = "1.10.1"
 composeBom = "2024.09.00"
+navigationSafeArgsGradlePlugin = "2.9.3"
 retrofit = "3.0.0"
 okhttp = "5.1.0"
 coilCompose = "3.3.0"
 composeMaterial = "1.4.1"
+navigationCommonKtx = "2.9.3"
+navigationRuntimeKtx = "2.9.3"
+secretsGradlePlugin = "2.0.1"
+navigationCompose = "2.9.3"
+foundation = "1.8.3"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-navigation-safe-args-gradle-plugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "navigationSafeArgsGradlePlugin" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -35,6 +42,10 @@ okhttpLoggingInterceptor = { group = "com.squareup.okhttp3", name = "logging-int
 coilCompose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coilCompose" }
 coilNetworkOkhttp = { group = "io.coil-kt.coil3", name = "coil-network-okhttp", version.ref = "coilCompose" }
 androidx-compose-material = { group = "androidx.wear.compose", name = "compose-material", version.ref = "composeMaterial" }
+androidx-navigation-common-ktx = { group = "androidx.navigation", name = "navigation-common", version.ref = "navigationCommonKtx" }
+secrets-gradle-plugin = { module = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin", version.ref = "secretsGradlePlugin" }
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
+androidx-foundation = { group = "androidx.compose.foundation", name = "foundation", version.ref = "foundation" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

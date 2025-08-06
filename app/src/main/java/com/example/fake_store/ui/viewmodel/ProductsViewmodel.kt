@@ -23,4 +23,11 @@ class ProductsViewmodel : ViewModel() {
              _productsState.value = ApiResult.Loading
              _productsState.value = ProductsRepo().getProducts()         }
     }
+    fun getProductById(id: Int): ProductResponse? {
+        return when (val result = _productsState.value) {
+            is ApiResult.Success -> result.data.find { it.id == id }
+            is ApiResult.Error -> null
+            ApiResult.Loading -> null
+        }
+    }
 }

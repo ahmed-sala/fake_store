@@ -1,9 +1,9 @@
 package com.example.fake_store.ui.screens
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -21,49 +21,44 @@ import coil3.compose.AsyncImage
 import com.example.fake_store.data.models.ProductResponse
 
 @Composable
-fun ProductItem(
-    product: ProductResponse,
-    onClick: (ProductResponse) -> Unit // Added onClick parameter
-) {
+fun ProductDetailsScreen(product: ProductResponse) {
     Column(
         modifier = Modifier
-            .fillMaxWidth()
-            .shadow(2.dp, RoundedCornerShape(12.dp))
-            .background(Color.White, RoundedCornerShape(12.dp))
-            .padding(12.dp)
-            .clickable { onClick(product) } // Make the item clickable
+            .fillMaxSize()
+            .padding(16.dp)
     ) {
+        Text(
+            text = product.title,
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold
+        )
+        Spacer(modifier = Modifier.height(8.dp))
         AsyncImage(
             model = product.images.firstOrNull(),
             contentDescription = null,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(180.dp),
+                .height(200.dp)
+                .shadow(2.dp, RoundedCornerShape(8.dp))
+                .background(Color.White, RoundedCornerShape(8.dp)),
             contentScale = ContentScale.Crop
         )
-
         Spacer(modifier = Modifier.height(8.dp))
-
         Text(
-            text = product.title,
-            fontSize = 16.sp,
-            fontWeight = FontWeight.SemiBold
-        )
-
-        Spacer(modifier = Modifier.height(4.dp))
-
-        Text(
-            text = "$${product.price}",
-            fontSize = 14.sp,
+            text = "Price: $${product.price}",
+            fontSize = 18.sp,
             color = Color.Green
         )
-
-        Spacer(modifier = Modifier.height(6.dp))
-
+        Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = product.category.name,
-            fontSize = 12.sp,
+            text = "Category: ${product.category.name}",
+            fontSize = 16.sp,
             color = Color.Gray
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(
+            text = "Description: ${product.description}",
+            fontSize = 14.sp
         )
     }
 }

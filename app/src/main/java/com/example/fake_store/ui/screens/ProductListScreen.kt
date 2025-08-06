@@ -1,8 +1,8 @@
 package com.example.fake_store.ui.screens
 
-import ProductItem
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -23,7 +23,10 @@ import com.example.fake_store.networking.ApiResult
 import com.example.fake_store.ui.viewmodel.ProductsViewmodel
 
 @Composable
-fun ProductListScreen(productsViewModel: ProductsViewmodel) {
+fun ProductListScreen(
+    productsViewModel: ProductsViewmodel,
+    onProductClick: (ProductResponse) -> Unit // Added navigation callback
+) {
     val productState by productsViewModel.productsState.collectAsState()
 
     when (productState) {
@@ -56,32 +59,34 @@ fun ProductListScreen(productsViewModel: ProductsViewmodel) {
             }
         }
         is ApiResult.Success -> {
-            val productList=(productState as ApiResult.Success<List<ProductResponse>>).data
+            val productList = (productState as ApiResult.Success<List<ProductResponse>>).data
             if (productList.isEmpty()) {
                 Box(
                     modifier = Modifier
-                        .fillMaxSize()
-                        .padding(16.dp),
+                        .fillMaxSize(),
                     contentAlignment = Alignment.Center
                 ) {
-
                     Text(
                         text = "No products available",
                         fontSize = 24.sp,
                         textAlign = TextAlign.Center
                     )
-
                 }
-            }
-            else {
+            } else {
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                        .padding(
+                            start = 16.dp,
+                            end = 24.dp
+                        ),
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     items(productList) { product ->
-                        ProductItem(product = product)
+                        ProductItem(
+                            product = product,
+                            onClick = onProductClick // Pass the callback to ProductItem
+                        )
                     }
                 }
             }
