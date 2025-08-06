@@ -4,13 +4,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.fake_store.data.models.ProductResponse
 import com.example.fake_store.data.repo.ProductsRepo
+import com.example.fake_store.networking.ApiResult
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class ProductsViewmodel : ViewModel() {
-    private val _productsState=MutableStateFlow<List<ProductResponse>>(emptyList())
-    val productsState: StateFlow<List<ProductResponse>> = _productsState
+    private val _productsState = MutableStateFlow<ApiResult<List<ProductResponse>>>(ApiResult.Loading)
+    val productsState: StateFlow<ApiResult<List<ProductResponse>>> = _productsState
 
     init {
         getProducts()
@@ -19,7 +20,7 @@ class ProductsViewmodel : ViewModel() {
     fun getProducts() {
 
          viewModelScope.launch {
-             _productsState.value = ProductsRepo().getProducts()
-         }
+             _productsState.value = ApiResult.Loading
+             _productsState.value = ProductsRepo().getProducts()         }
     }
 }
