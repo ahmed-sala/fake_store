@@ -1,8 +1,10 @@
 package com.example.fake_store.data.models
 
-import kotlinx.serialization.Serializable
 
-@Serializable
+import java.io.Serializable
+
+
+@kotlinx.serialization.Serializable
 data class ProductResponse(
     val category: Category,
     val description: String,
@@ -11,4 +13,4 @@ data class ProductResponse(
     val price: Int,
     val slug: String,
     val title: String
-)
+): Serializable

@@ -1,16 +1,13 @@
 package com.example.fake_store.ui.screens
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -29,36 +26,82 @@ fun ProductDetailsScreen(product: ProductResponse) {
     ) {
         Text(
             text = product.title,
-            fontSize = 24.sp,
+            style = MaterialTheme.typography.titleLarge,
             fontWeight = FontWeight.Bold
         )
-        Spacer(modifier = Modifier.height(8.dp))
-        AsyncImage(
-            model = product.images.firstOrNull(),
-            contentDescription = null,
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(200.dp)
-                .shadow(2.dp, RoundedCornerShape(8.dp))
-                .background(Color.White, RoundedCornerShape(8.dp)),
-            contentScale = ContentScale.Crop
-        )
-        Spacer(modifier = Modifier.height(8.dp))
+                .height(240.dp)
+                .shadow(4.dp, RoundedCornerShape(12.dp)),
+            shape = RoundedCornerShape(12.dp)
+        ) {
+            AsyncImage(
+                model = product.images.firstOrNull(),
+                contentDescription = "Product Image",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxSize()
+            )
+        }
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(8.dp))
+                .background(MaterialTheme.colorScheme.surfaceVariant)
+                .padding(12.dp)
+        ) {
+            AsyncImage(
+                model = product.category.image,
+                contentDescription = "Category Image",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(56.dp)
+                    .clip(RoundedCornerShape(8.dp))
+                    .background(Color.LightGray)
+            )
+
+            Spacer(modifier = Modifier.width(12.dp))
+
+            Column {
+                Text(
+                    text = product.category.name,
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.SemiBold
+                )
+                Text(
+                    text = "Category",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        }
+
+        Spacer(modifier = Modifier.height(24.dp))
+
         Text(
             text = "Price: $${product.price}",
-            fontSize = 18.sp,
-            color = Color.Green
+            style = MaterialTheme.typography.titleMedium,
+            color = MaterialTheme.colorScheme.primary
         )
-        Spacer(modifier = Modifier.height(8.dp))
+
+        Spacer(modifier = Modifier.height(12.dp))
+
         Text(
-            text = "Category: ${product.category.name}",
-            fontSize = 16.sp,
-            color = Color.Gray
+            text = "Description",
+            style = MaterialTheme.typography.titleSmall,
+            fontWeight = FontWeight.Medium
         )
-        Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = "Description: ${product.description}",
-            fontSize = 14.sp
+            text = product.description,
+            style = MaterialTheme.typography.bodyMedium,
+            modifier = Modifier.padding(top = 4.dp)
         )
     }
 }
