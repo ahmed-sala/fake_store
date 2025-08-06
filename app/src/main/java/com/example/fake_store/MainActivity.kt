@@ -5,7 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
-import androidx.compose.runtime.Composable
 import com.example.fake_store.navigator.MainNavigation
 import com.example.fake_store.ui.theme.Fake_storeTheme
 import com.example.fake_store.ui.viewmodel.ProductsViewmodel

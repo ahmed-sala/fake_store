@@ -13,7 +13,7 @@ import com.example.fake_store.ui.viewmodel.ProductsViewmodel
 @Composable
 fun MainNavigation(
     productsViewModel: ProductsViewmodel
-) { // Added viewmodel parameter
+) {
     val navController = rememberNavController()
 
     Scaffold { padding ->
